@@ -1,8 +1,8 @@
 name: dio_304_cache
 description: A new Flutter plugin for caching http response data and append to 304 response
 version: 0.0.1
-author:
-homepage:
+author: ncluu95@gmail.com
+homepage: https://github.com/Travelbee-VN/dio-304-cache
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
