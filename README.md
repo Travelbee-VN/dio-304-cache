@@ -39,7 +39,7 @@ __Go to [example project](https://github.com/Travelbee-VN/dio-304-cache/tree/mas
 + When calling `initCache304Interceptor ` , you can pass a `Cache304Config` to adjust following properies: 
 
 | Property name      | Type | Default Value |  Description |
-| --------- | -----:| | |
-| cacheLength  | int | 25 | ___LRU___ is used for cache strategy, if saved data length exceeds this number, the one with least used will be removed. |
-| cacheBoxName     | String |   dio_304_cache_hive_box |  the box name used to save data.|
-| hiveInitPath      |  String | use [path_provider](https://pub.dev/packages/path_provider) as Hive path init  | path to save your app data. If your app already called `Hive.init(<your_path>)`, set this property to null to prevent re-initialization. Or you can provide your own path. |
+| ------------------ | ---- | ------------- | ------------ |
+| cacheLength | int | 25 | ___LRU___ is used for cache strategy, if saved data length exceeds this number, the one with least used will be removed. |
+| cacheBoxName | String | dio_304_cache_hive_box | the box name used to save data. |
+| hiveInitPath | String | use [path_provider](https://pub.dev/packages/path_provider) as Hive path init | path to save your app data. If your app already called `Hive.init(<your_path>)`, set this property to null to prevent re-initialization. Or you can provide your own path. |
