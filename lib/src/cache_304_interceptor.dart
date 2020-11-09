@@ -12,7 +12,7 @@ class _Cache304InterceptorStaticFields {
   static Future<Box> getCachedBox() async {
     openBoxCount += 1;
     if (openBoxCount == 1) return await Hive.openBox(cacheBoxName);
-    return Hive.box(_Cache304InterceptorStaticFields.cacheBoxName);
+    return Hive.box(cacheBoxName);
   }
 
   static void closeCachedBox() async {
@@ -55,13 +55,29 @@ class Cache304Interceptor extends Interceptor {
     return super.onResponse(response);
   }
 
+  Future onError(DioError err) async {
+    if (err?.response?.statusCode == 304 &&
+        err.request.method.toUpperCase() == 'GET')
+      return onResponse(
+        Response(
+          headers: err?.response?.headers,
+          statusCode: 304,
+          request: err.request,
+        ),
+      );
+
+    return super.onError(err);
+  }
+
   Future<void> _checkToAddIfModifiedSince(RequestOptions options) async {
     if (options.method.toUpperCase() != 'GET') return;
 
     final cacheBox = await _Cache304InterceptorStaticFields.getCachedBox();
+
     final primaryKey = _getPrimaryKeyFromOptions(options);
     final cacheItem = cacheBox.get(primaryKey);
     _Cache304InterceptorStaticFields.closeCachedBox();
+
     if (cacheItem == null || cacheItem[lastModifiedKey] == null) return;
     options.headers.addAll({'If-Modified-Since': cacheItem[lastModifiedKey]});
   }
