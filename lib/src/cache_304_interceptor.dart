@@ -115,6 +115,11 @@ class Cache304Interceptor extends Interceptor {
       );
       _Cache304InterceptorStaticFields.closeCachedBox();
       return;
+    } else { //To update the cache with the latest modified date and data
+      cacheBox.put(primaryKey, {
+        lastModifiedKey: lastModified,
+        dataKey: data,
+      });
     }
 
     _prioritiseKey(cacheBox, cacheKeyList, primaryKey);
