@@ -1,3 +1,5 @@
+[dio_304_cache](https://pub.dev/packages/path_provider)
+
 ### What does this package do?
 
 - Save `last-modified` header and `data` from http response to app database when making `GET` request the first time (only work if request method is `GET` and reponse header has `last-modified`). <sup>(1)</sup>
@@ -47,4 +49,9 @@ __Go to [example project](https://github.com/Travelbee-VN/dio-304-cache/tree/mas
 _example:_ 
 ``` 
   await initCache304Interceptor(config: Cache304Config(cacheLength: 50));
+```
+
+To clear cache, use:
+``` 
+  await Cache304Interceptor.clearCache();
 ```
